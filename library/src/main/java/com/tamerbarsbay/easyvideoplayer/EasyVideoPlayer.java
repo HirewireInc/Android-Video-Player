@@ -239,7 +239,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
             return;
         }
 
-        mQuestionNumber.setVisibility(VISIBLE);
+        mQuestionNumber.setVisibility(View.VISIBLE);
         mQuestionNumber.setText(questionNumber);
     }
 
@@ -250,7 +250,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
             return;
         }
 
-        mQuestionText.setVisibility(VISIBLE);
+        mQuestionText.setVisibility(View.VISIBLE);
         mQuestionText.setText(questionText);
     }
 
@@ -708,6 +708,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         final FrameLayout.LayoutParams questionLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         questionLp.gravity = Gravity.BOTTOM;
+        addView(mQuestionDescription, questionLp);
 
         // Retrieve controls
         RelativeLayout controlsContainer = (RelativeLayout) mControlsFrame.findViewById(R.id.container_controls);
