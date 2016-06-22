@@ -90,6 +90,8 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private SeekBar mSeeker;
     private TextView mLabelPosition;
     private TextView mLabelDuration;
+    private TextView mQuestionNumber;
+    private TextView mQuestionText;
     private ImageButton mBtnPrevious;
     private ImageButton mBtnPlayPause;
     private ImageButton mBtnNext;
@@ -224,6 +226,28 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
             throw new IllegalArgumentException("Invalid right action specified.");
         mRightAction = action;
         invalidateActions();
+    }
+
+    @Override
+    public void setQuestionNumber(String questionNumber) {
+        if (questionNumber == null) {
+            mQuestionNumber.setVisibility(View.GONE);
+            return;
+        }
+
+        mQuestionNumber.setVisibility(VISIBLE);
+        mQuestionNumber.setText(questionNumber);
+    }
+
+    @Override
+    public void setQuestionText(String questionText) {
+        if (questionText == null) {
+            mQuestionText.setVisibility(GONE);
+            return;
+        }
+
+        mQuestionText.setVisibility(VISIBLE);
+        mQuestionText.setText(questionText);
     }
 
     @Override
@@ -685,6 +709,10 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         mLabelDuration = (TextView) mControlsFrame.findViewById(R.id.duration);
         mLabelDuration.setText(Util.getDurationString(0, true));
 
+        mQuestionNumber = (TextView) mControlsFrame.findViewById(R.id.question_number);
+
+        mQuestionText = (TextView) mControlsFrame.findViewById(R.id.question_text);
+
         invalidateThemeColors();
 
         mBtnPrevious = (ImageButton) mControlsFrame.findViewById(R.id.btnPrevious);
@@ -752,6 +780,8 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         mSeeker = null;
         mLabelPosition = null;
         mLabelDuration = null;
+        mQuestionNumber = null;
+        mQuestionText = null;
         mBtnPlayPause = null;
         mBtnPrevious = null;
         mBtnNext = null;
@@ -828,5 +858,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         mControlsFrame.setBackgroundColor(Util.adjustAlpha(mThemeColor, 0.85f));
         mLabelDuration.setTextColor(labelColor);
         mLabelPosition.setTextColor(labelColor);
+        mQuestionNumber.setTextColor(labelColor);
+        mQuestionText.setTextColor(labelColor);
     }
 }

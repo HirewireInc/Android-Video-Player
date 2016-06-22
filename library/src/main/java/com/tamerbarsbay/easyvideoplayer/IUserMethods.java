@@ -51,6 +51,10 @@ interface IUserMethods {
 
     void setInitialPosition(@IntRange(from = 0, to = Integer.MAX_VALUE) int pos);
 
+    void setQuestionNumber(String questionNumber);
+
+    void setQuestionText(String questionText);
+
     void showControls();
 
     void hideControls();
