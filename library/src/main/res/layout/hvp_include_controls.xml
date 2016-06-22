@@ -6,15 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#BF000000"
     android:clickable="true"
-    android:paddingBottom="@dimen/evp_content_inset_half"
-    android:paddingTop="@dimen/evp_content_inset">
+    android:paddingBottom="@dimen/hvp_content_inset_half"
+    android:paddingTop="@dimen/hvp_content_inset">
 
     <SeekBar
         android:id="@+id/seeker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/evp_content_inset_less"
-        android:layout_marginRight="@dimen/evp_content_inset_less"
+        android:layout_marginLeft="@dimen/hvp_content_inset_less"
+        android:layout_marginRight="@dimen/hvp_content_inset_less"
         android:visibility="gone" />
 
     <TextView
@@ -22,11 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seeker"
-        android:layout_marginLeft="@dimen/evp_content_inset"
-        android:layout_marginStart="@dimen/evp_content_inset"
+        android:layout_marginLeft="@dimen/hvp_content_inset"
+        android:layout_marginStart="@dimen/hvp_content_inset"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:textSize="@dimen/evp_text_size_small"
+        android:textSize="@dimen/hvp_text_size_small"
         android:visibility="gone"
         tools:ignore="UnusedAttribute"
         tools:text="00:00" />
@@ -38,51 +38,51 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/seeker"
-        android:layout_marginEnd="@dimen/evp_content_inset"
-        android:layout_marginRight="@dimen/evp_content_inset"
+        android:layout_marginEnd="@dimen/hvp_content_inset"
+        android:layout_marginRight="@dimen/hvp_content_inset"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:textSize="@dimen/evp_text_size_small"
+        android:textSize="@dimen/hvp_text_size_small"
         android:visibility="gone"
         tools:ignore="UnusedAttribute"
         tools:text="-05:00" />
 
     <ImageButton
         android:id="@+id/btnPrevious"
-        android:layout_width="@dimen/evp_button_size"
-        android:layout_height="@dimen/evp_button_size"
+        android:layout_width="@dimen/hvp_button_size"
+        android:layout_height="@dimen/hvp_button_size"
         android:layout_below="@+id/position"
-        android:layout_marginLeft="@dimen/evp_content_inset_iconbuttons"
-        android:layout_marginStart="@dimen/evp_content_inset_iconbuttons"
+        android:layout_marginLeft="@dimen/hvp_content_inset_iconbuttons"
+        android:layout_marginStart="@dimen/hvp_content_inset_iconbuttons"
         android:background="?selectableItemBackground"
-        android:paddingLeft="@dimen/evp_button_size"
-        android:paddingRight="@dimen/evp_button_size"
-        android:src="@drawable/evp_action_previous"
+        android:paddingLeft="@dimen/hvp_button_size"
+        android:paddingRight="@dimen/hvp_button_size"
+        android:src="@drawable/hvp_action_previous"
         tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/btnPlayPause"
-        android:layout_width="@dimen/evp_button_size"
-        android:layout_height="@dimen/evp_button_size"
+        android:layout_width="@dimen/hvp_button_size"
+        android:layout_height="@dimen/hvp_button_size"
         android:layout_below="@+id/position"
         android:layout_centerHorizontal="true"
         android:background="?selectableItemBackground"
-        android:src="@drawable/evp_action_play"
+        android:src="@drawable/hvp_action_play"
         tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/btnNext"
-        android:layout_width="@dimen/evp_button_size"
-        android:layout_height="@dimen/evp_button_size"
+        android:layout_width="@dimen/hvp_button_size"
+        android:layout_height="@dimen/hvp_button_size"
         android:layout_below="@+id/position"
-        android:layout_marginLeft="@dimen/evp_content_inset_iconbuttons"
-        android:layout_marginStart="@dimen/evp_content_inset_iconbuttons"
+        android:layout_marginLeft="@dimen/hvp_content_inset_iconbuttons"
+        android:layout_marginStart="@dimen/hvp_content_inset_iconbuttons"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="?selectableItemBackground"
-        android:paddingLeft="@dimen/evp_button_size"
-        android:paddingRight="@dimen/evp_button_size"
-        android:src="@drawable/evp_action_next"
+        android:paddingLeft="@dimen/hvp_button_size"
+        android:paddingRight="@dimen/hvp_button_size"
+        android:src="@drawable/hvp_action_next"
         tools:ignore="ContentDescription" />
 
 </RelativeLayout>

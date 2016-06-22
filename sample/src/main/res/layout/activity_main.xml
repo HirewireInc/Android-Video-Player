@@ -8,9 +8,9 @@
     app:hvp_disableControls="false"
     app:hvp_hideControlsOnPlay="true"
     app:hvp_leftAction="previous"
-    app:hvp_pauseDrawable="@drawable/evp_action_pause"
-    app:hvp_playDrawable="@drawable/evp_action_play"
-    app:hvp_previousDrawable="@drawable/evp_action_previous"
-    app:hvp_nextDrawable="@drawable/evp_action_next"
+    app:hvp_pauseDrawable="@drawable/hvp_action_pause"
+    app:hvp_playDrawable="@drawable/hvp_action_play"
+    app:hvp_previousDrawable="@drawable/hvp_action_previous"
+    app:hvp_nextDrawable="@drawable/hvp_action_next"
     app:hvp_rightAction="next"
     app:hvp_source="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" />

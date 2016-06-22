@@ -185,13 +185,13 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         }
 
         if (mPreviousDrawable == null)
-            mPreviousDrawable = ContextCompat.getDrawable(context, R.drawable.evp_action_previous);
+            mPreviousDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_previous);
         if (mPlayDrawable == null)
-            mPlayDrawable = ContextCompat.getDrawable(context, R.drawable.evp_action_play);
+            mPlayDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_play);
         if (mPauseDrawable == null)
-            mPauseDrawable = ContextCompat.getDrawable(context, R.drawable.evp_action_pause);
+            mPauseDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_pause);
         if (mNextDrawable == null)
-            mNextDrawable = ContextCompat.getDrawable(context, R.drawable.evp_action_next);
+            mNextDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_next);
     }
 
     @Override
@@ -647,7 +647,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         final LayoutInflater li = LayoutInflater.from(getContext());
 
         // Inflate and add progress
-        mProgressFrame = li.inflate(R.layout.evp_include_progress, this, false);
+        mProgressFrame = li.inflate(R.layout.hvp_include_progress, this, false);
         addView(mProgressFrame);
 
         // Instantiate and add click frame (used to toggle controls)
@@ -658,7 +658,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
         // Inflate controls
-        mControlsFrame = li.inflate(R.layout.evp_include_controls, this, false);
+        mControlsFrame = li.inflate(R.layout.hvp_include_controls, this, false);
         final FrameLayout.LayoutParams controlsLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         controlsLp.gravity = Gravity.BOTTOM;
