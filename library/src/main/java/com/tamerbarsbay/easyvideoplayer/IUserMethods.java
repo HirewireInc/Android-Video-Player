@@ -41,10 +41,6 @@ interface IUserMethods {
 
     void setPauseDrawableRes(@DrawableRes int res);
 
-    void setThemeColor(@ColorInt int color);
-
-    void setThemeColorRes(@ColorRes int colorRes);
-
     void setHideControlsOnPlay(boolean hide);
 
     void setAutoPlay(boolean autoPlay);

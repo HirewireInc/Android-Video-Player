@@ -6,10 +6,10 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="#BF000000"
+    android:background="@drawable/bg_question_description"
     android:clickable="true"
-    android:paddingTop="@dimen/hvp_content_inset_half"
-    android:paddingBottom="@dimen/hvp_content_inset_half"
+    android:paddingTop="@dimen/hvp_content_inset"
+    android:paddingBottom="@dimen/hvp_content_inset"
     android:paddingLeft="@dimen/hvp_content_inset"
     android:paddingRight="@dimen/hvp_content_inset">
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#fff"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:text="Introduce yourself in 10 seconds"/>
 
 </LinearLayout>

@@ -27,8 +27,6 @@
 
         <attr name="hvp_disableControls" format="boolean" />
 
-        <attr name="hvp_themeColor" format="color" />
-
     </declare-styleable>
 
 </resources>

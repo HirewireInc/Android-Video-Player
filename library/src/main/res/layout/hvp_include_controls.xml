@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:id="@+id/container_controls"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#BF000000"
     android:clickable="true"
     android:paddingBottom="@dimen/hvp_content_inset_half"
     android:paddingTop="@dimen/hvp_content_inset_half"
