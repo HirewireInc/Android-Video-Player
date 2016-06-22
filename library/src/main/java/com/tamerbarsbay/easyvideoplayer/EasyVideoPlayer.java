@@ -717,7 +717,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                 toggleControls();
             }
         });
-        
+
         mSeeker = (SeekBar) mControlsFrame.findViewById(R.id.seeker);
         mSeeker.setOnSeekBarChangeListener(this);
 
