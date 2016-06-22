@@ -1,4 +1,4 @@
-package com.afollestad.easyvideoplayer;
+package com.tamerbarsbay.easyvideoplayer;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;

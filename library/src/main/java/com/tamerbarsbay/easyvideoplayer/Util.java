@@ -1,4 +1,4 @@
-package com.afollestad.easyvideoplayer;
+package com.tamerbarsbay.easyvideoplayer;
 
 import android.content.Context;
 import android.content.res.TypedArray;

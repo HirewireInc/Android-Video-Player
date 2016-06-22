@@ -1,4 +1,4 @@
-package com.afollestad.easyvideoplayer;
+package com.tamerbarsbay.easyvideoplayer;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -35,12 +35,15 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.afollestad.easyvideoplayer.R;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * @author Aidan Follestad (afollestad)
+ * Adapted for Hirewire use by Tamer Barsbay.
+ * @author Aidan Follestad (afollestad).
  */
 public class EasyVideoPlayer extends FrameLayout implements IUserMethods, TextureView.SurfaceTextureListener,
         MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener,

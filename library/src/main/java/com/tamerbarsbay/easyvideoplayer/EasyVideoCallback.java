@@ -1,4 +1,4 @@
-package com.afollestad.easyvideoplayer;
+package com.tamerbarsbay.easyvideoplayer;
 
 /**
  * @author Aidan Follestad (afollestad)
