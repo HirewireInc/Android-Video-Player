@@ -149,25 +149,25 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                     0, 0);
             try {
 
-                String source = a.getString(R.styleable.EasyVideoPlayer_evp_source);
+                String source = a.getString(R.styleable.EasyVideoPlayer_hvp_source);
                 if (source != null && !source.trim().isEmpty())
                     mSource = Uri.parse(source);
 
                 //noinspection WrongConstant
-                mLeftAction = a.getInteger(R.styleable.EasyVideoPlayer_evp_leftAction, LEFT_ACTION_PREVIOUS);
+                mLeftAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_leftAction, LEFT_ACTION_PREVIOUS);
                 //noinspection WrongConstant
-                mRightAction = a.getInteger(R.styleable.EasyVideoPlayer_evp_rightAction, RIGHT_ACTION_NEXT);
+                mRightAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_rightAction, RIGHT_ACTION_NEXT);
 
-                mPreviousDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_evp_previousDrawable);
-                mPlayDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_evp_playDrawable);
-                mPauseDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_evp_pauseDrawable);
-                mNextDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_evp_nextDrawable);
+                mPreviousDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_previousDrawable);
+                mPlayDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_playDrawable);
+                mPauseDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_pauseDrawable);
+                mNextDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_nextDrawable);
 
-                mHideControlsOnPlay = a.getBoolean(R.styleable.EasyVideoPlayer_evp_hideControlsOnPlay, true);
-                mAutoPlay = a.getBoolean(R.styleable.EasyVideoPlayer_evp_autoPlay, false);
-                mControlsDisabled = a.getBoolean(R.styleable.EasyVideoPlayer_evp_disableControls, false);
+                mHideControlsOnPlay = a.getBoolean(R.styleable.EasyVideoPlayer_hvp_hideControlsOnPlay, true);
+                mAutoPlay = a.getBoolean(R.styleable.EasyVideoPlayer_hvp_autoPlay, false);
+                mControlsDisabled = a.getBoolean(R.styleable.EasyVideoPlayer_hvp_disableControls, false);
 
-                mThemeColor = a.getColor(R.styleable.EasyVideoPlayer_evp_themeColor,
+                mThemeColor = a.getColor(R.styleable.EasyVideoPlayer_hvp_themeColor,
                         Util.resolveColor(context, R.attr.colorPrimary));
             } finally {
                 a.recycle();
