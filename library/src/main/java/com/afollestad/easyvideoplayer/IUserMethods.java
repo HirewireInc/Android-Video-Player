@@ -9,8 +9,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -27,25 +25,13 @@ interface IUserMethods {
 
     void setRightAction(@EasyVideoPlayer.RightAction int action);
 
-    void setCustomLabelText(@Nullable CharSequence text);
+    void setPreviousDrawable(@NonNull Drawable drawable);
 
-    void setCustomLabelTextRes(@StringRes int textRes);
+    void setPreviousDrawableRes(@DrawableRes int res);
 
-    void setBottomLabelText(@Nullable CharSequence text);
+    void setNextDrawable(@NonNull Drawable drawable);
 
-    void setBottomLabelTextRes(@StringRes int textRes);
-
-    void setRetryText(@Nullable CharSequence text);
-
-    void setRetryTextRes(@StringRes int res);
-
-    void setSubmitText(@Nullable CharSequence text);
-
-    void setSubmitTextRes(@StringRes int res);
-
-    void setRestartDrawable(@NonNull Drawable drawable);
-
-    void setRestartDrawableRes(@DrawableRes int res);
+    void setNextDrawableRes(@DrawableRes int res);
 
     void setPlayDrawable(@NonNull Drawable drawable);
 

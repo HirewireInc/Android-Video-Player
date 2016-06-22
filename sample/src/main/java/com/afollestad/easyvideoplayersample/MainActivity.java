@@ -1,6 +1,5 @@
 package com.afollestad.easyvideoplayersample;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -62,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements EasyVideoCallback
     }
 
     @Override
-    public void onRetry(EasyVideoPlayer player, Uri source) {
-        Toast.makeText(this, "Retry", Toast.LENGTH_SHORT).show();
+    public void onNext(EasyVideoPlayer player) {
+        Toast.makeText(this, "Next", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onSubmit(EasyVideoPlayer player, Uri source) {
-        Toast.makeText(this, "Submit", Toast.LENGTH_SHORT).show();
+    public void onPrevious(EasyVideoPlayer player) {
+        Toast.makeText(this, "Previous", Toast.LENGTH_SHORT).show();
     }
 }

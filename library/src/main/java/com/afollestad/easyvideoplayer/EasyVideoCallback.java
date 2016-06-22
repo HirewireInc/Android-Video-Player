@@ -1,7 +1,5 @@
 package com.afollestad.easyvideoplayer;
 
-import android.net.Uri;
-
 /**
  * @author Aidan Follestad (afollestad)
  */
@@ -17,7 +15,8 @@ public interface EasyVideoCallback {
 
     void onCompletion(EasyVideoPlayer player);
 
-    void onRetry(EasyVideoPlayer player, Uri source);
+    void onPrevious(EasyVideoPlayer player);
 
-    void onSubmit(EasyVideoPlayer player, Uri source);
+    void onNext(EasyVideoPlayer player);
+
 }
