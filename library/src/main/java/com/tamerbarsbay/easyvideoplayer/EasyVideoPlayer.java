@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -49,20 +50,22 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnVideoSizeChangedListener, MediaPlayer.OnErrorListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
-    @IntDef({LEFT_ACTION_NONE, LEFT_ACTION_PREVIOUS})
+    @IntDef({LEFT_ACTION_NONE, LEFT_ACTION_PREVIOUS, LEFT_ACTION_RESTART})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LeftAction {
     }
 
-    @IntDef({RIGHT_ACTION_NONE, RIGHT_ACTION_NEXT})
+    @IntDef({RIGHT_ACTION_NONE, RIGHT_ACTION_NEXT, RIGHT_ACTION_MUTE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RightAction {
     }
 
     public static final int LEFT_ACTION_NONE = 0;
     public static final int LEFT_ACTION_PREVIOUS = 1;
-    public static final int RIGHT_ACTION_NONE = 2;
-    public static final int RIGHT_ACTION_NEXT = 3;
+    public static final int LEFT_ACTION_RESTART = 2;
+    public static final int RIGHT_ACTION_NONE = 3;
+    public static final int RIGHT_ACTION_NEXT = 4;
+    public static final int RIGHT_ACTION_MUTE = 5;
     private static final int UPDATE_INTERVAL = 100;
 
     public EasyVideoPlayer(Context context) {
@@ -84,6 +87,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private Surface mSurface;
 
     private View mControlsFrame;
+    private View mQuestionDescription;
     private View mProgressFrame;
     private View mClickFrame;
 
@@ -92,9 +96,9 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private TextView mLabelDuration;
     private TextView mQuestionNumber;
     private TextView mQuestionText;
-    private ImageButton mBtnPrevious;
+    private ImageButton mBtnLeft;
     private ImageButton mBtnPlayPause;
-    private ImageButton mBtnNext;
+    private ImageButton mBtnRight;
 
     private MediaPlayer mPlayer;
     private boolean mSurfaceAvailable;
@@ -109,13 +113,13 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private EasyVideoCallback mCallback;
     private EasyVideoProgressCallback mProgressCallback;
     @LeftAction
-    private int mLeftAction = LEFT_ACTION_PREVIOUS;
+    private int mLeftAction = LEFT_ACTION_RESTART;
     @RightAction
-    private int mRightAction = RIGHT_ACTION_NEXT;
-    private Drawable mPreviousDrawable;
+    private int mRightAction = RIGHT_ACTION_MUTE;
+    private Drawable mLeftDrawable;
     private Drawable mPlayDrawable;
     private Drawable mPauseDrawable;
-    private Drawable mNextDrawable;
+    private Drawable mRightDrawable;
     private boolean mHideControlsOnPlay = true;
     private boolean mAutoPlay;
     private int mInitialPosition = -1;
@@ -159,14 +163,14 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                     mSource = Uri.parse(source);
 
                 //noinspection WrongConstant
-                mLeftAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_leftAction, LEFT_ACTION_PREVIOUS);
+                mLeftAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_leftAction, LEFT_ACTION_RESTART);
                 //noinspection WrongConstant
-                mRightAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_rightAction, RIGHT_ACTION_NEXT);
+                mRightAction = a.getInteger(R.styleable.EasyVideoPlayer_hvp_rightAction, RIGHT_ACTION_MUTE);
 
-                mPreviousDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_previousDrawable);
+                mLeftDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_previousDrawable);
                 mPlayDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_playDrawable);
                 mPauseDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_pauseDrawable);
-                mNextDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_nextDrawable);
+                mRightDrawable = a.getDrawable(R.styleable.EasyVideoPlayer_hvp_nextDrawable);
 
                 mHideControlsOnPlay = a.getBoolean(R.styleable.EasyVideoPlayer_hvp_hideControlsOnPlay, true);
                 mAutoPlay = a.getBoolean(R.styleable.EasyVideoPlayer_hvp_autoPlay, false);
@@ -178,22 +182,22 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                 a.recycle();
             }
         } else {
-            mLeftAction = LEFT_ACTION_PREVIOUS;
-            mRightAction = RIGHT_ACTION_NEXT;
+            mLeftAction = LEFT_ACTION_RESTART;
+            mRightAction = RIGHT_ACTION_MUTE;
             mHideControlsOnPlay = true;
             mAutoPlay = false;
             mControlsDisabled = false;
             mThemeColor = Util.resolveColor(context, R.attr.colorPrimary);
         }
 
-        if (mPreviousDrawable == null)
-            mPreviousDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_previous);
+        if (mLeftDrawable == null)
+            mLeftDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_previous);
         if (mPlayDrawable == null)
             mPlayDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_play);
         if (mPauseDrawable == null)
             mPauseDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_pause);
-        if (mNextDrawable == null)
-            mNextDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_next);
+        if (mRightDrawable == null)
+            mRightDrawable = ContextCompat.getDrawable(context, R.drawable.hvp_action_next);
     }
 
     @Override
@@ -251,25 +255,25 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     }
 
     @Override
-    public void setPreviousDrawable(@NonNull Drawable drawable) {
-        mPreviousDrawable = drawable;
-        mBtnPrevious.setImageDrawable(drawable);
+    public void setLeftDrawable(@NonNull Drawable drawable) {
+        mLeftDrawable = drawable;
+        mBtnLeft.setImageDrawable(drawable);
     }
 
     @Override
-    public void setPreviousDrawableRes(@DrawableRes int res) {
-        setPreviousDrawable(ContextCompat.getDrawable(getContext(), res));
+    public void setLeftDrawableRes(@DrawableRes int res) {
+        setLeftDrawable(ContextCompat.getDrawable(getContext(), res));
     }
 
     @Override
-    public void setNextDrawable(@NonNull Drawable drawable) {
-        mNextDrawable = drawable;
-        mBtnNext.setImageDrawable(drawable);
+    public void setRightDrawable(@NonNull Drawable drawable) {
+        mRightDrawable = drawable;
+        mBtnRight.setImageDrawable(drawable);
     }
 
     @Override
-    public void setNextDrawableRes(@DrawableRes int res) {
-        setNextDrawable(ContextCompat.getDrawable(getContext(), res));
+    public void setRightDrawableRes(@DrawableRes int res) {
+        setRightDrawable(ContextCompat.getDrawable(getContext(), res));
     }
 
     @Override
@@ -344,13 +348,13 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         if (mSeeker == null) return;
         mSeeker.setEnabled(enabled);
         mBtnPlayPause.setEnabled(enabled);
-        mBtnPrevious.setEnabled(enabled);
-        mBtnNext.setEnabled(enabled);
+        mBtnLeft.setEnabled(enabled);
+        mBtnRight.setEnabled(enabled);
 
         final float disabledAlpha = .4f;
         mBtnPlayPause.setAlpha(enabled ? 1f : disabledAlpha);
-        mBtnPrevious.setAlpha(enabled ? 1f : disabledAlpha);
-        mBtnNext.setAlpha(enabled ? 1f : disabledAlpha);
+        mBtnLeft.setAlpha(enabled ? 1f : disabledAlpha);
+        mBtnRight.setAlpha(enabled ? 1f : disabledAlpha);
 
         mClickFrame.setEnabled(enabled);
     }
@@ -684,8 +688,8 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         // Inflate controls
         mControlsFrame = li.inflate(R.layout.hvp_include_controls, this, false);
         final FrameLayout.LayoutParams controlsLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        controlsLp.gravity = Gravity.BOTTOM;
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        controlsLp.gravity = Gravity.CENTER;
         addView(mControlsFrame, controlsLp);
         if (mControlsDisabled) {
             mClickFrame.setOnClickListener(null);
@@ -699,7 +703,21 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
             });
         }
 
+        // Inflate question description
+        mQuestionDescription = li.inflate(R.layout.hvp_include_question_description, this, false);
+        final FrameLayout.LayoutParams questionLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        questionLp.gravity = Gravity.BOTTOM;
+
         // Retrieve controls
+        RelativeLayout controlsContainer = (RelativeLayout) mControlsFrame.findViewById(R.id.container_controls);
+        controlsContainer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleControls();
+            }
+        });
+        
         mSeeker = (SeekBar) mControlsFrame.findViewById(R.id.seeker);
         mSeeker.setOnSeekBarChangeListener(this);
 
@@ -709,19 +727,18 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         mLabelDuration = (TextView) mControlsFrame.findViewById(R.id.duration);
         mLabelDuration.setText(Util.getDurationString(0, true));
 
-        mQuestionNumber = (TextView) mControlsFrame.findViewById(R.id.question_number);
-
-        mQuestionText = (TextView) mControlsFrame.findViewById(R.id.question_text);
+        mQuestionNumber = (TextView) mQuestionDescription.findViewById(R.id.question_number);
+        mQuestionText = (TextView) mQuestionDescription.findViewById(R.id.question_text);
 
         invalidateThemeColors();
 
-        mBtnPrevious = (ImageButton) mControlsFrame.findViewById(R.id.btnPrevious);
-        mBtnPrevious.setOnClickListener(this);
-        mBtnPrevious.setImageDrawable(mPreviousDrawable);
+        mBtnLeft = (ImageButton) mControlsFrame.findViewById(R.id.btnLeftAction);
+        mBtnLeft.setOnClickListener(this);
+        mBtnLeft.setImageDrawable(mLeftDrawable);
 
-        mBtnNext = (ImageButton) mControlsFrame.findViewById(R.id.btnNext);
-        mBtnNext.setOnClickListener(this);
-        mBtnNext.setImageDrawable(mNextDrawable);
+        mBtnRight = (ImageButton) mControlsFrame.findViewById(R.id.btnRightAction);
+        mBtnRight.setOnClickListener(this);
+        mBtnRight.setImageDrawable(mRightDrawable);
 
         mBtnPlayPause = (ImageButton) mControlsFrame.findViewById(R.id.btnPlayPause);
         mBtnPlayPause.setOnClickListener(this);
@@ -742,16 +759,16 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
                     hideControls();
                 start();
             }
-        } else if (view.getId() == R.id.btnPrevious) {
+        } else if (view.getId() == R.id.btnLeftAction) {
             if (mCallback != null)
-                mCallback.onPrevious(this);
+                mCallback.onLeftAction(this);
 
             //TODO temp commented out when this used to just restart the video
 //            seekTo(0);
 //            if (!isPlaying()) start();
-        } else if (view.getId() == R.id.btnNext) {
+        } else if (view.getId() == R.id.btnRightAction) {
             if (mCallback != null)
-                mCallback.onNext(this);
+                mCallback.onRightAction(this);
         }
     }
 
@@ -783,10 +800,11 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
         mQuestionNumber = null;
         mQuestionText = null;
         mBtnPlayPause = null;
-        mBtnPrevious = null;
-        mBtnNext = null;
+        mBtnLeft = null;
+        mBtnRight = null;
 
         mControlsFrame = null;
+        mQuestionDescription = null;
         mClickFrame = null;
         mProgressFrame = null;
 
@@ -807,18 +825,24 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private void invalidateActions() {
         switch (mLeftAction) {
             case LEFT_ACTION_NONE:
-                mBtnPrevious.setVisibility(View.GONE);
+                mBtnLeft.setVisibility(View.GONE);
                 break;
             case LEFT_ACTION_PREVIOUS:
-                mBtnPrevious.setVisibility(View.VISIBLE);
+                mBtnLeft.setVisibility(View.VISIBLE);
+                break;
+            case LEFT_ACTION_RESTART:
+                mBtnLeft.setVisibility(VISIBLE);
                 break;
         }
         switch (mRightAction) {
             case RIGHT_ACTION_NONE:
-                mBtnNext.setVisibility(View.GONE);
+                mBtnRight.setVisibility(View.GONE);
                 break;
             case RIGHT_ACTION_NEXT:
-                mBtnNext.setVisibility(View.VISIBLE);
+                mBtnRight.setVisibility(View.VISIBLE);
+                break;
+            case RIGHT_ACTION_MUTE:
+                mBtnRight.setVisibility(VISIBLE);
                 break;
         }
     }
@@ -856,6 +880,7 @@ public class EasyVideoPlayer extends FrameLayout implements IUserMethods, Textur
     private void invalidateThemeColors() {
         final int labelColor = Util.isColorDark(mThemeColor) ? Color.WHITE : Color.BLACK;
         mControlsFrame.setBackgroundColor(Util.adjustAlpha(mThemeColor, 0.85f));
+        mQuestionDescription.setBackgroundColor(Util.adjustAlpha(mThemeColor, 0.85f));
         mLabelDuration.setTextColor(labelColor);
         mLabelPosition.setTextColor(labelColor);
         mQuestionNumber.setTextColor(labelColor);

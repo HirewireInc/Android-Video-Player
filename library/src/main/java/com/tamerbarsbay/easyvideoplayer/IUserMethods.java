@@ -25,13 +25,13 @@ interface IUserMethods {
 
     void setRightAction(@EasyVideoPlayer.RightAction int action);
 
-    void setPreviousDrawable(@NonNull Drawable drawable);
+    void setLeftDrawable(@NonNull Drawable drawable);
 
-    void setPreviousDrawableRes(@DrawableRes int res);
+    void setLeftDrawableRes(@DrawableRes int res);
 
-    void setNextDrawable(@NonNull Drawable drawable);
+    void setRightDrawable(@NonNull Drawable drawable);
 
-    void setNextDrawableRes(@DrawableRes int res);
+    void setRightDrawableRes(@DrawableRes int res);
 
     void setPlayDrawable(@NonNull Drawable drawable);
 

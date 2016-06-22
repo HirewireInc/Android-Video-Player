@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity implements EasyVideoCallback
     }
 
     @Override
-    public void onNext(EasyVideoPlayer player) {
-        Toast.makeText(this, "Next", Toast.LENGTH_SHORT).show();
+    public void onRightAction(EasyVideoPlayer player) {
+        Toast.makeText(this, "Right", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onPrevious(EasyVideoPlayer player) {
-        Toast.makeText(this, "Previous", Toast.LENGTH_SHORT).show();
+    public void onLeftAction(EasyVideoPlayer player) {
+        Toast.makeText(this, "Left", Toast.LENGTH_SHORT).show();
     }
 }

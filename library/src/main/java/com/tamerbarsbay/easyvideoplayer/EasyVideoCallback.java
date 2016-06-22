@@ -15,8 +15,8 @@ public interface EasyVideoCallback {
 
     void onCompletion(EasyVideoPlayer player);
 
-    void onPrevious(EasyVideoPlayer player);
+    void onLeftAction(EasyVideoPlayer player);
 
-    void onNext(EasyVideoPlayer player);
+    void onRightAction(EasyVideoPlayer player);
 
 }

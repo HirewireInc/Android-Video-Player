@@ -2,43 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:id="@+id/container_controls"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#BF000000"
     android:clickable="true"
     android:paddingBottom="@dimen/hvp_content_inset_half"
-    android:paddingTop="@dimen/hvp_content_inset_half">
-
-    <LinearLayout
-        android:id="@+id/container_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <TextView
-            android:id="@+id/question_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:textColor="#fff"
-            android:visibility="gone"
-            android:layout_marginRight="16dp"
-            tools:text="Q1"/>
-
-        <TextView
-            android:id="@+id/question_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:visibility="gone"
-            tools:text="Introduce yourself in 10 seconds"/>
-
-    </LinearLayout>
+    android:paddingTop="@dimen/hvp_content_inset_half"
+    android:gravity="center">
 
     <SeekBar
         android:id="@+id/seeker"
@@ -46,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/hvp_content_inset_less"
         android:layout_marginRight="@dimen/hvp_content_inset_less"
-        android:layout_below="@id/container_description"
         android:visibility="gone" />
 
     <TextView
@@ -80,7 +50,7 @@
         tools:text="-05:00" />
 
     <ImageButton
-        android:id="@+id/btnPrevious"
+        android:id="@+id/btnLeftAction"
         android:layout_width="@dimen/hvp_button_size"
         android:layout_height="@dimen/hvp_button_size"
         android:layout_below="@+id/position"
@@ -103,7 +73,7 @@
         tools:ignore="ContentDescription" />
 
     <ImageButton
-        android:id="@+id/btnNext"
+        android:id="@+id/btnRightAction"
         android:layout_width="@dimen/hvp_button_size"
         android:layout_height="@dimen/hvp_button_size"
         android:layout_below="@+id/position"
