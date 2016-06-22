@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/evp_content_inset_less"
-        android:layout_marginRight="@dimen/evp_content_inset_less" />
+        android:layout_marginRight="@dimen/evp_content_inset_less"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/position"
@@ -26,6 +27,7 @@
         android:fontFamily="sans-serif"
         android:textColor="#fff"
         android:textSize="@dimen/evp_text_size_small"
+        android:visibility="gone"
         tools:ignore="UnusedAttribute"
         tools:text="00:00" />
 
@@ -41,6 +43,7 @@
         android:fontFamily="sans-serif"
         android:textColor="#fff"
         android:textSize="@dimen/evp_text_size_small"
+        android:visibility="gone"
         tools:ignore="UnusedAttribute"
         tools:text="-05:00" />
 
